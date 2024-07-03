@@ -1,0 +1,41 @@
+{% extends "index.html" %} {% block title %}Inicio - Consulta de Materiales{%
+endblock %} {% block content %}
+<div class="px-4 py-3 my-2 text-center">
+  <h1 class="display-6 fw-bold text-primary">Consulta de materiales</h1>
+</div>
+
+<form method="post" action="{{url_for('consulta')}}">
+  <div class="col-md-10 col-10 mx-auto text-center">
+    <label for="name" class="form-label fw-bold fs-5"
+      >Por favor inserte cédula del técnico:</label
+    >
+    <div
+      class="d-grid d-sm-flex justify-content-sm-center align-items-center my-1"
+    >
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        style="width: 90%"
+      />
+      <button type="submit" class="btn btn-primary btn-lg px-4 py-1">
+        consultar
+      </button>
+    </div>
+  </div>
+</form>
+
+{% if consulta_result %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-xl-12">
+      <h2 class="form-label fw-bold fs-5">
+        Resultado de la consulta para {{ name }}: {{ user }}
+      </h2>
+      <h2 class="form-label fw-bold fs-5">Equipos: {{ eq }}</h2>
+      <div class="styled-table">{{ consulta_result|safe }}</div>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %}

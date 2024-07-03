@@ -1,0 +1,8 @@
+{% extends "index.html" %} {% block content %}
+<div class="almacen">
+    <strong class="almacen_title">STOCK - EIA TIGO MEDELLIN MASIVOS</strong>
+</div>
+<div class="container mt-4">
+  <div class="styled-table">{{ df_html | safe }}</div>
+</div>
+{% endblock %}

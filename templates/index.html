@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>EIA - Suministros</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='fav.ico') }}"
+    />
+    <style>
+      html, body {
+        font-family: Arial, sans-serif;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    main {
+        flex: 1;
+        padding: 10px;
+    }
+
+      .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      table {
+        width: -webkit-fill-available;
+      }
+      .styled-table th,
+      .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .styled-table th {
+        background-color: #f2f2f2;
+        color: #333;
+      }
+
+      .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f9f9f9;
+      }
+
+      .styled-table tbody tr:hover {
+        background-color: #ececec;
+      }
+      .almacen{
+        text-align: center;
+        justify-content:center;
+        padding: 10px;
+      }
+
+      .almacen_title {
+        text-align:center;
+        align-items: center;
+        color: #3498db;
+      }
+
+      .navbar {
+        background: #3498db !important;
+      }
+
+      .navbar-nav .nav-link {
+        color: white !important;
+      }
+      .copyright{
+        text-align:center;
+        padding: 15px;
+        background: rgb(182, 210, 63);
+        margin: 0;
+      }
+      .copyright p{
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center navbar-light p-2 bg-light">
+        <a class="navbar-brand" href="#">
+          <img
+            class="d-block mx-auto mb-4"
+            src="{{ url_for('static', filename='images/logo-eiasa-new.png') }}"
+            alt="EIA Logo"
+            width="120"
+            height="100%"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/"
+                >Inicio</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/bodega">Stock Almacén</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <main>{% block content %} {% endblock %}</main>
+
+    <footer>
+      <div class="copyright">
+        <p class="copyright-title">© 2024 EIA. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+  </body>
+</html>
