@@ -1,6 +1,8 @@
 import os
 import runapi
-import data
+import data as dt
+
+
 from flask import (
     Flask,
     redirect,
@@ -77,10 +79,19 @@ def consulta():
 @app.route("/bodega", methods=["GET"])
 def bodega():
     try:
-        df = data.suministros()
+        page = request.args.get("page", 1, type=int)
+        per_page = 10
+        df = dt.suministros(page, per_page)
         if df is not None:
-            df_html = df.to_html()
-            return render_template("almacen.html", df_html=df_html)
+            df, total_pages = dt.suministros(page, per_page)
+
+            df_html = df.to_html(
+                classes=["table", "table-striped", "table-bordered"], index=False
+            )
+
+            return render_template(
+                "almacen.html", df_html=df_html, page=page, total_pages=total_pages
+            )
 
         else:
             return """<html lang="es">
@@ -103,5 +114,5 @@ def color_diff(val):
 
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8080)
-    # app.run(debug=True)
+    # serve(app, host="0.0.0.0", port=8080)
+    app.run(debug=True)
