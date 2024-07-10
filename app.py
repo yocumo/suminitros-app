@@ -80,7 +80,7 @@ def consulta():
 def bodega():
     try:
         page = request.args.get("page", 1, type=int)
-        per_page = 10
+        per_page = 200
         df = dt.suministros(page, per_page)
         if df is not None:
             df, total_pages = dt.suministros(page, per_page)
