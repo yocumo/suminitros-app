@@ -6,14 +6,19 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"
     />
-    <link
-      rel="shortcut icon"
-      href=""
-    /> 
+    
     <link
     rel="shortcut icon"
-    href=""
+    href="{{ url_for('static', filename='fav.ico') }}"
   />
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery-3.7.0.js') }}"></script>
+    <script src="{{ url_for('static', filename='datatables/jquery.dataTables.js') }}"></script>
+
+     <!-- DataTables CSS -->
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='datatables/jquery.dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='datatables/jquery.dataTables.min.css') }}">
+
     <style>
       html, body {
         font-family: Arial, sans-serif;
@@ -130,6 +135,6 @@
         <p class="copyright-title">© 2024 EIA. Todos los derechos reservados.</p>
       </div>
     </footer>
-
+    
   </body>
 </html>

@@ -15,6 +15,8 @@ from flask import (
 
 from waitress import serve
 
+import logging
+
 app = Flask(__name__)
 
 
@@ -37,7 +39,6 @@ def hello():
 
 @app.route("/consulta", methods=["POST"])
 def consulta():
-
     name = str(request.form.get("name"))
     if name:
         print(f"Request for consulta page received with name={name}")
@@ -79,33 +80,15 @@ def consulta():
 @app.route("/bodega", methods=["GET"])
 def bodega():
     try:
-        page = request.args.get("page", 1, type=int)
-        per_page = 200
-        df = dt.suministros(page, per_page)
-        if df is not None:
-            df, total_pages = dt.suministros(page, per_page)
-
-            df_html = df.to_html(
-                classes=["table", "table-striped", "table-bordered"], index=False
-            )
-
-            return render_template(
-                "almacen.html", df_html=df_html, page=page, total_pages=total_pages
-            )
-
-        else:
-            return """<html lang="es">
-                     <head>
-                        <meta charset="UTF-8">
-                        <title>Hola Mundo</title>
-                     </head>
-                     <body>
-                        <h1>¡Ups! al parecer no hay datos para mostrar</h1>
-                     </body>
-                     </html>"""
+        return render_template("almacen.html")
     except ValueError as e:
         print(f"Error: {e} -- redirecting to /hello")
         return redirect(url_for("hello"))
+
+
+@app.route("/api/suministros")
+def suministros():
+    return dt.suministros()
 
 
 def color_diff(val):
@@ -114,5 +97,5 @@ def color_diff(val):
 
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8080)
-    # app.run(debug=True)
+    # serve(app, host="0.0.0.0", port=8080)
+    app.run(debug=True)

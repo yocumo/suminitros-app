@@ -1,3 +1,4 @@
+from flask import json, jsonify
 import requests
 import pandas as pd
 from io import BytesIO
@@ -35,42 +36,9 @@ def RunApi(URL):
 
 
 # ETL cartera bodega
-# def suministros():
-#     api = "https://app.sytex.io/api/materialstocktotaldata?org_id=164&should_list_in_warehouse_stock=467&virtual_warehouse_stock=467"
-#     ln = RunApi(api)
-#     df_bodega = ln.drop(
-#         columns=[
-#             "Stock de seguridad",
-#             "Stock crítico",
-#             "Cantidad disponible",
-#             "Cantidad comprometida",
-#         ]
-#     )
-#     df_bodega = df_bodega.sort_values(by="Tipo de material")
-#     return df_bodega
-
-
-def suministros(page=1, per_page=10):
+def suministros():
     api = "https://app.sytex.io/api/materialstocktotaldata?org_id=164&should_list_in_warehouse_stock=467&virtual_warehouse_stock=467"
     ln = RunApi(api)
-    df_bodega = ln.drop(
-        columns=[
-            "Stock de seguridad",
-            "Stock crítico",
-            "Cantidad disponible",
-            "Cantidad comprometida",
-        ]
-    )
-    df_bodega = df_bodega.sort_values(by="Tipo de material")
-
-    # Calcular el inicio y fin de la página actual
-    start = (page - 1) * per_page
-    end = start + per_page
-
-    # Obtener solo los datos de la página actual
-    paginated_data = df_bodega.iloc[start:end]
-
-    # Calcular el número total de páginas
-    total_pages = (len(df_bodega) + per_page - 1) // per_page
-    print(paginated_data)
-    return paginated_data, total_pages
+    df_bodega = ln.sort_values(by="Tipo de material")
+    json_data = df_bodega.to_json(orient="records")
+    return jsonify(json.loads(json_data))
