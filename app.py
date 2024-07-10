@@ -15,8 +15,6 @@ from flask import (
 
 from waitress import serve
 
-import logging
-
 app = Flask(__name__)
 
 
